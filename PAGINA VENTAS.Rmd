@@ -1,0 +1,78 @@
+---
+title: "ANALISIS DE VENTAS"
+author: "AUGUSTO ALARCON"
+date: "8/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![](C:\Users\Augusto\Downloads\TRABAJO R STUDIO\UPB-01.jpg){width=500 height=500}
+
+![](C:\Users\Augusto\Downloads\TRABAJO R STUDIO\foto.jpg){width=150 height=200}
+e-mail: augustoludwing@hotmail.com
+
+## Grupo KBL Bolivia
+
+La compañia en estudio comercializa medicamentos para patologias oncologicas, los productos que maneja la empresa representas costos elevados por lo que la **gestion eficiente del inventario** es un punto critico en los procesos dentro de la empresa.
+
+La empresa atraviesa problemas de desabastecimiento y sobrestock que ocaciona vencimiento de productos, ambos casos en casos particulares de productos. Para el analisis presente utilizaremos de ejemplo un producto de consumo recurrente y otro producto de consumo irregular, hacemos la diferenciacion para mostrar los diferentes comportamientos.
+
+# REFERENCIAS DE POSIBLES SOLUCIONES
+
+**Diseño de un plan de gestión de inventario para mejorar las ventas de mercaderías en una empresa comercializadora de medicamentos**
+*JJ Pérez Samaniego, MA Cruces Najarro - 2019*
+http://168.121.49.87/handle/URP/3114
+
+**Análisis y Evaluación del Sistema de Gestión de Inventario de Medicamentos Antirretrovirales en el Consejo Presidencial del SIDA (COPRESIDA)**
+*LE Ortega, P Julnes, P Ortega - 2015*
+http://bibliotecajuanbosch.org/wp-content/uploads/iglobal/tesis/ADP/ADP%20514%20TESIS%20L.%20ORTEGA%2010-0138.PDF
+
+**Descripción del proceso de Implementación del Sistema de Inventario Computarizado “Farmasis” en la Botica Unifarma, Lima–2020.**
+*JB Medina García, SZ Tapia Huillcara - 2020 - repositorio.upeu.edu.pe*
+https://repositorio.upeu.edu.pe/handle/UPEU/3950
+
+## DATOS - PRODUCTO DE CONSUMO REGULAR
+
+```{r}
+library(readxl)
+DATOS <- read_excel("C:/Users/Augusto/Downloads/TRABAJO R STUDIO/DATOS.xlsx", 
+    sheet = "RES_CICLO", col_types = c("date", 
+        "text", "numeric"))
+View(DATOS)
+plot(DATOS$Fecha,DATOS$`Suma de Cantidad`,type = "h",ylim = c(0,200),ylab = "CANTIDAD VENDIDA",xlab = "FECHA",main = "PRODUCTOS VENDIDOS POR FECHA",col="blue")
+```
+
+```{r}
+hist(DATOS$`Suma de Cantidad`,breaks=500,xlim = c(0,20),ylim = c(0,800),main = "HISTOGRAMA DE VENTA DE CICLOFOSMIDA",xlab = "CANTIDAD VENDIDA POR DIA",ylab = "FRECUENCIA",col = "blue",freq = TRUE,axes = TRUE)
+```
+
+## DATOS - PRODUCTO DE CONSUMO IRREGULAR
+
+```{r}
+library(readxl)
+DATOS1 <- read_excel("C:/Users/Augusto/Downloads/TRABAJO R STUDIO/DATOS.xlsx", 
+    sheet = "RES_BOZO", col_types = c("date", 
+        "text", "numeric"))
+View(DATOS1)
+plot(DATOS1$Fecha,DATOS1$`Suma de Cantidad`,type = "h",ylim = c(0,50),ylab = "CANTIDAD VENDIDA",xlab = "FECHA",main = "PRODUCTOS VENDIDOS POR FECHA",col="red")
+```
+
+```{r}
+hist(DATOS1$`Suma de Cantidad`,breaks=100,xlim = c(0,20),ylim = c(0,20),main = "HISTOGRAMA DE VENTA DE BOZO",xlab = "CANTIDAD VENDIDA POR DIA",ylab = "FRECUENCIA",col = "blue",freq = TRUE,axes = TRUE)
+```
+
+```{r}
+density(DATOS$`Suma de Cantidad`)
+plot(density(DATOS$`Suma de Cantidad`))
+```
+
+```{r}
+density(DATOS1$`Suma de Cantidad`)
+plot(density(DATOS1$`Suma de Cantidad`))
+```
+
+
+
